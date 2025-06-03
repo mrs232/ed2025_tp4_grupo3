@@ -139,6 +139,20 @@ public:
     Carrito(vector<Producto> productosAnadidos) {
         this->productosAnadidos = productosAnadidos;
     }
+   // Agregar producto al carrito
+    void anadirProducto(Producto producto) {
+        productosAnadidos.push_back(producto);
+    }
+
+    // Eliminar producto del carrito
+    void eliminarProducto(string codigo) {
+        for (auto it = productosAnadidos.begin(); it != productosAnadidos.end(); ++it) {
+            if (it->getCodigo() == codigo) {
+                productosAnadidos.erase(it);
+                break;
+            }
+        }
+    }
 
     // Getters
     vector<Producto> getProductosAnadidos() { return productosAnadidos; }
