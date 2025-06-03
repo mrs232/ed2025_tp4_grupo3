@@ -80,6 +80,18 @@ public:
         this->productosComprados = productosComprados;
         this->montoTotal = montoTotal;
     }
+    // Mostrar resumen del pedido
+    void mostrarResumen() {
+        cout << "Resumen del Pedido:" << endl;
+        for(int i=0; i<productosComprados.size(); i++) {
+            cout << "Producto: " << productosComprados[i].getNombre() << endl;
+            cout << "Precio: $" << productosComprados[i].getPrecio() << endl;
+            cout << "Codigo: " << productosComprados[i].getCodigo() << endl;
+            cout << "Stock: " << productosComprados[i].getStock() << endl;
+            cout << "------------------------" << endl;
+        }
+        cout << "Monto Total: $" << montoTotal << endl;
+    }
 
     // Getters
     vector<Producto> getProductosComprados() { return productosComprados; }
