@@ -75,7 +75,12 @@ private:
     float montoTotal;
 
 public:
-// Constructor
+    // Constructor por defecto
+    Pedido() {
+        productosComprados = {};
+        montoTotal = 0.0;
+    }
+    // Constructor
     Pedido(vector<Producto> productosComprados, float montoTotal) {
         this->productosComprados = productosComprados;
         this->montoTotal = montoTotal;
