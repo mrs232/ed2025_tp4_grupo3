@@ -18,6 +18,21 @@ private:
     float precio;
     string codigo;
     int stock;
+
+public:
+    // Constructor
+    Producto(string nombre, float precio, string codigo, int stock) {
+        this->nombre = nombre;
+        this->precio = precio;
+        this->codigo = codigo;
+        this->stock = stock;
+    }
+
+    // Getters
+    string getNombre() { return nombre; }
+    float getPrecio() { return precio; }
+    string getCodigo() { return codigo; }
+    int getStock() { return stock; }
 };
 
 // --- Clase Pedido ---
@@ -26,6 +41,17 @@ class Pedido {
 private:
     vector<Producto> productosComprados; // Un conjunto de productos.
     float montoTotal;
+
+public:
+// Constructor
+    Pedido(vector<Producto> productosComprados, float montoTotal) {
+        this->productosComprados = productosComprados;
+        this->montoTotal = montoTotal;
+    }
+
+    // Getters
+    vector<Producto> getProductosComprados() { return productosComprados; }
+    float getMontoTotal() { return montoTotal; }
 };
 
 // --- Clase Cliente ---
@@ -35,6 +61,18 @@ private:
     string nombre;
     string idCliente; // Se usa string por flexibilidad.
     vector<Pedido> historialCompras; // Lista de pedidos anteriores.
+
+public:
+    // Constructor
+    Cliente(string nombre, string idCliente) {
+        this->nombre = nombre;
+        this->idCliente = idCliente;
+    }
+
+    // Getters
+    string getNombre() { return nombre; }
+    string getIdCliente() { return idCliente; }
+    vector<Pedido> getHistorialCompras() { return historialCompras; }
 };
 
 // --- Clase Carrito ---
@@ -42,6 +80,15 @@ private:
 class Carrito {
 private:
     vector<Producto> productosAnadidos; // Productos que el cliente ha agregado.
+
+public:
+    // Constructor
+    Carrito(vector<Producto> productosAnadidos) {
+        this->productosAnadidos = productosAnadidos;
+    }
+
+    // Getters
+    vector<Producto> getProductosAnadidos() { return productosAnadidos; }
 };
 
 //Cosas marcos,franco y victor
