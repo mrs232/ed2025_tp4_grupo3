@@ -212,3 +212,95 @@ public:
 };
 
 //main
+int main() {
+    ProductoFisico libro("Libro C++", 30.0, "P001", 10, 1.2);
+    ProductoDigital curso("Curso C++ Online", 20.0, "P002", 100, 500);
+    ProductoFisico mouse("Mouse Gamer", 25.0, "P003", 8, 0.3);
+    ProductoDigital app("App Premium", 15.0, "P004", 50, 150);
+
+    vector<Producto> catalogo = {libro, curso, mouse, app};
+    Cliente cliente("Juan", "C001");
+    Carrito carrito(vector<Producto>{});
+    ColaPedidos cola;
+
+    int opcion;
+    do {
+        cout << "\n--- MENU TIENDA ONLINE ---" << endl;
+        cout << "1. Ver productos" << endl;
+        cout << "2. Agregar producto al carrito" << endl;
+        cout << "3. Eliminar producto del carrito" << endl;
+        cout << "4. Ver carrito" << endl;
+        cout << "5. Confirmar pedido" << endl;
+        cout << "6. Ver historial de pedidos" << endl;
+        cout << "0. Salir" << endl;
+        cout << "OpciÃ³n: ";
+        cin >> opcion;
+
+        if (opcion == 1) {
+            cout << "\n--- Productos Disponibles ---" << endl;
+            for (Producto& p : catalogo) {
+                cout << "Nombre: " << p.getNombre()
+                     << " | CÃ³digo: " << p.getCodigo()
+                     << " | Precio: $" << p.getPrecio()
+                     << " | Stock: " << p.getStock() << endl;
+            }
+        } else if (opcion == 2) {
+            string cod;
+            cout << "CÃ³digo del producto a agregar: ";
+            cin >> cod;
+            bool encontrado = false;
+            for (Producto& p : catalogo) {
+                if (p.getCodigo() == cod) {
+                    carrito.anadirProducto(p);
+                    cout << "Producto agregado." << endl;
+                    encontrado = true;
+                    break;
+                }
+            }
+            if (!encontrado) cout << "CÃ³digo no encontrado." << endl;
+        } else if (opcion == 3) {
+            string cod;
+            cout << "CÃ³digo del producto a eliminar: ";
+            cin >> cod;
+            carrito.eliminarProducto(cod);
+            cout << "Producto eliminado (si estaba)." << endl;
+        } else if (opcion == 4) {
+            vector<Producto> productos = carrito.getProductosAnadidos();
+            cout << "\n--- Carrito Actual ---" << endl;
+            if (productos.empty()) {
+                cout << "El carrito estÃ¡ vacÃ­o." << endl;
+            } else {
+                for (Producto& p : productos) {
+                    cout << "Producto: " << p.getNombre()
+                         << " | CÃ³digo: " << p.getCodigo()
+                         << " | Precio: $" << p.getPrecio() << endl;
+                }
+            }
+        } else if (opcion == 5) {
+            vector<Producto> productos = carrito.getProductosAnadidos();
+            if (productos.empty()) {
+                cout << "El carrito estÃ¡ vacÃ­o. No se puede confirmar." << endl;
+            } else {
+                float total = 0;
+                for (Producto& p : productos) {
+                    total += p.getPrecio();
+                }
+                Pedido nuevoPedido(productos, total);
+                cliente.getHistorialCompras().push_back(nuevoPedido);
+                cola.encolar(nuevoPedido);
+                cout << "\nPedido confirmado. Detalles:" << endl;
+                nuevoPedido.mostrarResumen();
+                carrito.setProductosAnadidos({});
+            }
+        } else if (opcion == 6) {
+            cout << "\n--- Pedidos realizados (en cola) ---" << endl;
+            cola.mostrarPedidos();
+        } else if (opcion == 0) {
+            cout << "Saliendo del sistema." << endl;
+        } else {
+            cout << "OpciÃ³n invÃ¡lida." << endl;
+        }
+    } while (opcion != 0);
+
+    return 0;
+}
