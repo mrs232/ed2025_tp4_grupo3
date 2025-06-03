@@ -33,6 +33,12 @@ public:
     float getPrecio() { return precio; }
     string getCodigo() { return codigo; }
     int getStock() { return stock; }
+
+    // Setters
+    void setNombre(string nombre) { this->nombre = nombre; }
+    void setPrecio(float precio) { this->precio = precio; }
+    void setCodigo(string codigo) { this->codigo = codigo; }
+    void setStock(int stock) { this->stock = stock; }
 };
 
 // --- Clase Pedido ---
@@ -52,6 +58,10 @@ public:
     // Getters
     vector<Producto> getProductosComprados() { return productosComprados; }
     float getMontoTotal() { return montoTotal; }
+
+    // Setters
+    void setProductosComprados(vector<Producto> productos) { this->productosComprados = productos; }
+    void setMontoTotal(float monto) { this->montoTotal = monto; }
 };
 
 // --- Clase Cliente ---
@@ -73,6 +83,11 @@ public:
     string getNombre() { return nombre; }
     string getIdCliente() { return idCliente; }
     vector<Pedido> getHistorialCompras() { return historialCompras; }
+
+    // Setters
+    void setNombre(string nombre) { this->nombre = nombre; }
+    void setIdCliente(string id) { this->idCliente = id; }
+    void setHistorialCompras(vector<Pedido> historial) { this->historialCompras = historial; }
 };
 
 // --- Clase Carrito ---
@@ -89,6 +104,9 @@ public:
 
     // Getters
     vector<Producto> getProductosAnadidos() { return productosAnadidos; }
+
+    // Setters
+    void setProductosAnadidos(vector<Producto> productos) { this->productosAnadidos = productos; }
 };
 
 //Cosas marcos,franco y victor
