@@ -43,3 +43,55 @@ class Carrito {
 private:
     vector<Producto> productosAnadidos; // Productos que el cliente ha agregado.
 };
+
+//Cosas marcos,franco y victor
+
+// --- TDA Cola para pedidos ---
+class NodoPedido {
+public:
+    Pedido pedido;
+    NodoPedido* siguiente;
+
+    NodoPedido(Pedido pedido) {
+        this->pedido = pedido;
+        this->siguiente = nullptr;
+    }
+};
+
+class ColaPedidos {
+private:
+    NodoPedido* frente;
+    NodoPedido* final;
+
+public:
+    ColaPedidos() {
+        frente = nullptr;
+        final = nullptr;
+    }
+
+    void encolar(Pedido pedido) {
+        NodoPedido* nuevo = new NodoPedido(pedido);
+        if (final == nullptr) {
+            frente = nuevo;
+            final = nuevo;
+        } else {
+            final->siguiente = nuevo;
+            final = nuevo;
+        }
+    }
+
+    void mostrarPedidos() {
+        NodoPedido* actual = frente;
+        int i = 1;
+        while (actual != nullptr) {
+            cout << "\nPedido #" << i++ << ":" << endl;
+            actual->pedido.mostrarResumen();
+            actual = actual->siguiente;
+        }
+        if (frente == nullptr) {
+            cout << "No hay pedidos en la cola." << endl;
+        }
+    }
+};
+
+//main
