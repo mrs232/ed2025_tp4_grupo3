@@ -40,7 +40,33 @@ public:
     void setCodigo(string codigo) { this->codigo = codigo; }
     void setStock(int stock) { this->stock = stock; }
 };
+class ProductoFisico : public Producto {
+private:
+    float peso; // en kilogramos
 
+public:
+    ProductoFisico(string nombre, float precio, string codigo, int stock, float peso)
+        : Producto(nombre, precio, codigo, stock) {
+        this->peso = peso;
+    }
+
+    float getPeso() { return peso; }
+    void setPeso(float peso) { this->peso = peso; }
+};
+
+class ProductoDigital : public Producto {
+private:
+    float tamanoArchivo; // en MB
+
+public:
+    ProductoDigital(string nombre, float precio, string codigo, int stock, float tamanoArchivo)
+        : Producto(nombre, precio, codigo, stock) {
+        this->tamanoArchivo = tamanoArchivo;
+    }
+
+    float getTamanoArchivo() { return tamanoArchivo; }
+    void setTamanoArchivo(float tamano) { this->tamanoArchivo = tamano; }
+};
 // --- Clase Pedido ---
 // Define los datos de un pedido realizado.
 class Pedido {
